@@ -1,0 +1,44 @@
+body {
+    background-image: url("https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8&w=1000&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: "Bookman Old Style", serif
+}
+
+#weather-container {
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    max-width: 50%;
+    max-height: 50%;
+    margin-left: 25%;
+    margin-top: 10%;
+    padding: 5px;
+    background-color: rgba(205,205,205,0.8);
+}
+
+#sunrise-sunset{
+    display: flex;
+    justify-content: space-around;
+}
+#sunrise-sunset td {
+}
+
+#sunrise-sunset td {
+    padding: 10px;
+}
+
+#temperature {
+    display: flex;
+    justify-content: space-around;
+}
+#temperature td {
+    padding: 5px;
+}
+
+#icon-sunrise, #icon-sunset {
+    width: 50px;
+    height: 50px;
+}

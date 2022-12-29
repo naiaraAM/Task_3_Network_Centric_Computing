@@ -3,8 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>Fetch JSON from API</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+
+
+
+    <div id="weather-container">
+        <div id="weather">
+            <h1>Weather forecast</h1>
+            Select a city:
+            <label for="city"></label>
+            <select id="city">
+                <option value="Maribor">
+                    Maribor, Slovenia
+                </option>
+                <option value="Santander">
+                    Santander, Spain
+                </option>
+            </select>
+            <br>
+
+            <table id="temperature">
+                <tr>
+                    <td rowspan="2"><span id="actual"></span>º</td>
+                    <td>Max: <span id="max">º</span>º</td>
+                </tr>
+                <tr>
+                    <td>Min: <span id="min"></span>º</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Feels like: <span id="feels-like">º</span>º </td>
+                </tr>
+            </table>
+
+
+            <table id="sunrise-sunset">
+                <tr>
+                    <td>
+                        <img id="icon-sunrise" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png" alt="Sunrise icon">
+                    </td>
+                    <td>
+                        <img id="icon-sunset" src="https://cdn-icons-png.flaticon.com/512/3920/3920799.png" alt="Sunset icon">
+                    </td>
+                </tr>
+                <tr>
+                    <td id="sunrise"></td>
+                    <td id="sunset"></td>
+            </table>
+            <p>latitude: <span id="lat"></span></p>
+            <p>longitude: <span id="lon"></span> </p>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        async function getWeatherAPI(url) {
+            const response = await fetch(url);
+            const data = await response.json();
+            // Temperature
+            const temp = data.main;
+            document.getElementById("actual").innerHTML = temp.temp;
+            document.getElementById("feels-like").innerHTML = temp.feels_like;
+            document.getElementById("min").innerHTML = temp.temp_min;
+            document.getElementById("max").innerHTML = temp.temp_max;
+
+            // Sunrise and sunset
+            const sys = data.sys;
+            let sunrise = sys.sunrise;
+            let sunset = sys.sunset;
+            let dateSunrire = new Date(sunrise * 1000);
+            let dateSunset = new Date(sunset * 1000);
+            document.getElementById("sunrise").innerHTML = dateSunrire.toLocaleTimeString();
+            document.getElementById("sunset").innerHTML = dateSunset.toLocaleTimeString();
+
+        }
+
+
+        let e = document.getElementById("city");
+        function onChange() {
+            let text = e.options[e.selectedIndex].text;
+
+            let city = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+
+            let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=cb2e9426acc7b3bdabd14474ae9e8311';
+            getWeatherAPI(url);
+        }
+        e.onchange = onChange;
+        onChange();
+    </script>
 
 </body>
 </html>
