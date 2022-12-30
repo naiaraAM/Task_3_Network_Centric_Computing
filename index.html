@@ -27,19 +27,43 @@
 
             <table id="temperature">
                 <tr>
-                    <td rowspan="2"><span id="actual"></span>º</td>
-                    <td>Max: <span id="max">º</span>º</td>
+                    <td id="icon-td">
+                        <span id="icon"></span>
+                    </td>
+                    <td id="actual-td">
+                        <span id="actual"></span>º
+                    </td>
                 </tr>
                 <tr>
-                    <td>Min: <span id="min"></span>º</td>
+                    <td colspan="3">
+                        <span id="max"></span>º/<span id="min"></span>º
                 </tr>
                 <tr>
-                    <td colspan="2">Feels like: <span id="feels-like">º</span>º </td>
+                    <td colspan="3">
+                        Thermal sensation <span id="feels-like"></span>º
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <span id="description"></span>
+                    </td>
                 </tr>
             </table>
-
-
+            <br>
+            Humidity: <span id="humidity"></span>%
+            <br>
+            Cloudiness: <span id="cloudiness"></span>%
+            <br>
+            <br>
             <table id="sunrise-sunset">
+                <tr>
+                    <td>
+                        Sunrise
+                    </td>
+                    <td>
+                        Sunset
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         <img id="icon-sunrise" src="https://cdn-icons-png.flaticon.com/512/3920/3920688.png" alt="Sunrise icon">
@@ -52,49 +76,75 @@
                     <td id="sunrise"></td>
                     <td id="sunset"></td>
             </table>
-            <p>latitude: <span id="lat"></span></p>
-            <p>longitude: <span id="lon"></span> </p>
+            <br>
+            Forecast for the next 5 days:
+            <br>
+            <table id="forecast">
+                <tr>
+                    <td class="forecast">
+
+                    <td class="forecast">
+                        <span id="day1"></span>
+                    </td>
+                    <td class="forecast">
+                        <span id="day2"></span>
+                    </td>
+                    <td class="forecast">
+                        <span id="day3"></span>
+                    </td>
+                    <td class="forecast">
+                        <span id="day4"></span>
+                    </td>
+                    <td class="forecast">
+                        <span id="day5"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="forecast">
+                        Max
+                    </td>
+                    <td class="forecast">
+                        <span id="day1-max"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day2-max"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day3-max"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day4-max"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day5-max"></span>º
+                    </td>
+                </tr>
+                <tr>
+                    <td class="forecast">
+                        Min
+                    </td>
+                    <td class="forecast">
+                        <span id="day1-min"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day2-min"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day3-min"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day4-min"></span>º
+                    </td>
+                    <td class="forecast">
+                        <span id="day5-min"></span>º
+                    </td>
+                </tr>
+            </table>
+            <span id="map"></span>
         </div>
     </div>
 
-
-
-    <script>
-
-        async function getWeatherAPI(url) {
-            const response = await fetch(url);
-            const data = await response.json();
-            // Temperature
-            const temp = data.main;
-            document.getElementById("actual").innerHTML = temp.temp;
-            document.getElementById("feels-like").innerHTML = temp.feels_like;
-            document.getElementById("min").innerHTML = temp.temp_min;
-            document.getElementById("max").innerHTML = temp.temp_max;
-
-            // Sunrise and sunset
-            const sys = data.sys;
-            let sunrise = sys.sunrise;
-            let sunset = sys.sunset;
-            let dateSunrire = new Date(sunrise * 1000);
-            let dateSunset = new Date(sunset * 1000);
-            document.getElementById("sunrise").innerHTML = dateSunrire.toLocaleTimeString();
-            document.getElementById("sunset").innerHTML = dateSunset.toLocaleTimeString();
-
-        }
-
-
-        let e = document.getElementById("city");
-        function onChange() {
-            let text = e.options[e.selectedIndex].text;
-
-            let city = text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
-
-            let url = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=cb2e9426acc7b3bdabd14474ae9e8311';
-            getWeatherAPI(url);
-        }
-        e.onchange = onChange;
-        onChange();
-    </script>
+    <script src="script.js"></script>
 
 </body>
 </html>
