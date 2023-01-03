@@ -15,7 +15,6 @@ async function getWeatherAPI(url) {
 
     // Temperature
     const temp = data.main;
-    // redondea la temperatura a 0 decimales
     document.getElementById("actual").innerHTML = Math.round(temp.temp);
     document.getElementById("feels-like").innerHTML = Math.round(temp.feels_like);
     document.getElementById("min").innerHTML = Math.round(temp.temp_min);
@@ -25,9 +24,9 @@ async function getWeatherAPI(url) {
     const sys = data.sys;
     let sunrise = sys.sunrise;
     let sunset = sys.sunset;
-    let dateSunrire = new Date(sunrise * 1000);
+    let dateSunrise = new Date(sunrise * 1000);
     let dateSunset = new Date(sunset * 1000);
-    document.getElementById("sunrise").innerHTML = dateSunrire.toLocaleTimeString();
+    document.getElementById("sunrise").innerHTML = dateSunrise.toLocaleTimeString();
     document.getElementById("sunset").innerHTML = dateSunset.toLocaleTimeString();
 
     //Humidity
@@ -45,7 +44,7 @@ async function getWeatherAPI(url) {
 
     let lat = data.coord.lat;
     let lon = data.coord.lon;
-    const urlMap = 'https://openweathermap.org/weathermap?basemap=map&cities=false&layer=precipitation&lat=' + lat + '&lon=' + lon + '&zoom=5';
+    const urlMap = 'https://openweathermap.org/weathermap?basemap=map&cities=false&layer=precipitation&lat=' + lat + '&lon=' + lon + '&zoom=10';
     document.getElementById("map").innerHTML = `<iframe width="100%" height="500" style="border:0" loading="lazy" allowfullscreen src="${urlMap}"></iframe>`;
 }
 
