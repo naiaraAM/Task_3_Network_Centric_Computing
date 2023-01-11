@@ -4,7 +4,6 @@ async function getWeatherAPI(url) {
 
     // Weather conditions
     const weather = data.weather;
-    //const url = 'https://openweathermap.org/img/wn/'
     let icon = weather[0].icon;
     let png = icon + ".png";
     let iconUrl = 'https://openweathermap.org/img/wn/' + png;
@@ -39,7 +38,7 @@ async function getWeatherAPI(url) {
     // Forecast
     let longitude = data.coord.lon;
     let latitude = data.coord.lat;
-    const urlForecast = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + longitude.toFixed(2) + '&lon=' + latitude.toFixed(2) + '&units=metric&appid=cb2e9426acc7b3bdabd14474ae9e8311';
+    const urlForecast = 'https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude.toFixed(2) + '&lon=' + longitude.toFixed(2) + '&units=metric&appid=cb2e9426acc7b3bdabd14474ae9e8311';
     getWeatherForecast(urlForecast);
 
     let lat = data.coord.lat;
